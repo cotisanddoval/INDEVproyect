@@ -1,0 +1,93 @@
+.navbar-indev { background-color: var(--rosa); }
+.navbar-indev .navbar-brand { font-weight: 600; letter-spacing: .5px; }
+
+/* Barra de navegación */
+.navbar-indev { background-color: #fff; box-shadow: 0 2px 10px rgba(0, 0, 0, .05); }
+.navbar-indev .nav-link { color: var(--texto); font-weight: 500; }
+.navbar-indev .nav-link:hover { color: var(--rosa); }
+.logo-indev { display: flex; flex-direction: column; line-height: 1; }
+.logo-texto { font-size: 1.6rem; font-weight: 700; }
+.logo-in { color: var(--rosa); }
+.logo-dev { color: var(--celeste); }
+.logo-indev small { font-size: .65rem; font-weight: 400; color: var(--texto); margin-top: 2px; }
+
+/* Portada */
+.hero { padding: 3rem 0; }
+.hero-titulo { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 700; line-height: 1.2; }
+.hero-texto { color: #555; margin: 1rem 0 1.5rem; max-width: 28rem; }
+.btn-indev {
+    background: var(--rosa);
+    color: #fff;
+    border: 0;
+    border-radius: .75rem;
+    padding: .7rem 2rem;
+}
+.btn-indev:hover { filter: brightness(.95); color: #fff; }
+
+/* Tarjetas de módulos */
+.card-modulo {
+    background: #fff;
+    border-radius: 1rem;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    height: 100%;
+    color: var(--texto);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, .06);
+    transition: transform .15s, box-shadow .15s;
+}
+.card-modulo:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0, 0, 0, .1); }
+.card-modulo h3 { font-size: 1rem; font-weight: 600; margin: .9rem 0 .4rem; }
+.card-modulo .desc { font-size: .8rem; color: #6c757d; margin-bottom: .6rem; }
+.card-modulo .cuenta { font-size: .75rem; color: #6c757d; }
+.icono-circulo {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    color: #fff;
+}
+.tono-rosa .icono-circulo { background: var(--rosa); }
+.tono-celeste .icono-circulo { background: var(--celeste); }
+
+/* Lista de ejercicios del módulo */
+.fila-ejercicio {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: #fff;
+    border-radius: .9rem;
+    padding: .9rem 1.1rem;
+    color: var(--texto);
+    text-decoration: none;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, .05);
+}
+a.fila-ejercicio:hover { box-shadow: 0 4px 16px rgba(0, 0, 0, .1); color: var(--texto); }
+.fila-ejercicio .numero {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: var(--rosa-suave);
+    color: var(--rosa);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+}
+.fila-ejercicio .tipo {
+    display: block;
+    font-size: .72rem;
+    font-weight: 600;
+    color: var(--celeste);
+    text-transform: uppercase;
+    letter-spacing: .5px;
+}
+.fila-ejercicio .texto { font-size: .95rem; }
+.fila-ejercicio > i { font-size: 1.3rem; color: var(--celeste); }
+.fila-ejercicio.hecho .numero { background: #dff5e6; color: #2e9b57; }
+.fila-ejercicio.hecho > i { color: #2e9b57; }
+.fila-ejercicio.bloqueado { opacity: .6; box-shadow: none; background: #f1f2f6; }
+.fila-ejercicio.bloqueado .numero { background: #e3e6ee; color: #8a8fa0; }

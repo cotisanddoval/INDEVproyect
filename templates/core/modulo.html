@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ modulo.nombre }} - INDEV{% endblock %}
+
+{% block content %}
+<a href="{% url 'home' %}" class="text-decoration-none small">&larr; Volver</a>
+<h1 class="h3 mt-2">{{ modulo.nombre }}</h1>
+<p class="text-muted mb-4">{{ modulo.descripcion }}</p>
+
+{% for mensaje in messages %}
+<div class="alert alert-warning">{{ mensaje }}</div>
+{% endfor %}
+
+<div class="d-grid gap-2">
+    {% for ej in ejercicios %}
+        {% if ej.disponible %}
+        <a href="{% url 'ejercicio' ej.pk %}" class="fila-ejercicio {% if ej.completado %}hecho{% endif %}">
+            <span class="numero">{{ forloop.counter }}</span>
+            <span class="flex-grow-1">
+                <span class="tipo">{{ ej.get_tipo_display }}</span>
+                <span class="texto">{{ ej.enunciado|truncatechars:70 }}</span>
+            </span>
+            {% if ej.completado %}
+            <i class="bi bi-check-circle-fill"></i>
+            {% else %}
+            <i class="bi bi-play-circle"></i>
+            {% endif %}
+        </a>
+        {% else %}
+        <div class="fila-ejercicio bloqueado">
+            <span class="numero"><i class="bi bi-lock-fill"></i></span>
+            <span class="flex-grow-1 texto">Ejercicio {{ forloop.counter }}</span>
+        </div>
+        {% endif %}
+    {% empty %}
+    <p class="text-muted">Todavía no hay ejercicios en este módulo.</p>
+    {% endfor %}
+</div>
+{% endblock %}

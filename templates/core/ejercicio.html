@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %}Ejercicio - INDEV{% endblock %}
+
+{% block content %}
+<a href="{% url 'modulo' ejercicio.modulo.slug %}" class="text-decoration-none">
+    &larr; {{ ejercicio.modulo.nombre }}
+</a>
+
+<div class="card border-0 shadow-sm mt-3">
+    <div class="card-body p-4">
+        <span class="badge bg-secondary mb-3">{{ ejercicio.get_tipo_display }}</span>
+        <p class="fs-5">{{ ejercicio.enunciado }}</p>
+
+        {% if resultado is not True %}
+        <form method="post">
+            {% csrf_token %}
+
+            {% if ejercicio.tipo == 'seleccion' %}
+                {% for opcion in ejercicio.opciones.all %}
+                <div class="form-check mb-2">
+                    <input class="form-check-input" type="radio" name="respuesta"
+                           id="op{{ opcion.id }}" value="{{ opcion.id }}" required>
+                    <label class="form-check-label" for="op{{ opcion.id }}">{{ opcion.texto }}</label>
+                </div>
+                {% endfor %}
+
+            {% elif ejercicio.tipo == 'completar' %}
+                <input type="text" name="respuesta" class="form-control"
+                       placeholder="Escribí la palabra que falta" required autocomplete="off">
+
+            {% elif ejercicio.tipo == 'vf' %}
+                <div class="form-check mb-2">
+                    <input class="form-check-input" type="radio" name="respuesta"
+                           id="vf-true" value="true" required>
+                    <label class="form-check-label" for="vf-true">Verdadero</label>
+                </div>
+                <div class="form-check mb-2">
+                    <input class="form-check-input" type="radio" name="respuesta"
+                           id="vf-false" value="false">
+                    <label class="form-check-label" for="vf-false">Falso</label>
+                </div>
+            {% endif %}
+
+            <button type="submit" class="btn btn-primary mt-3">Comprobar</button>
+        </form>
+        {% endif %}
+
+        {% if resultado is False %}
+        <div class="alert alert-danger mt-3">Incorrecto, intentá de nuevo.</div>
+        {% elif resultado is True %}
+        <div class="alert alert-success mt-3">¡Correcto!</div>
+        {% if ejercicio.explicacion %}
+        <p class="text-muted">{{ ejercicio.explicacion }}</p>
+        {% endif %}
+        {% if siguiente %}
+        <a href="{% url 'ejercicio' siguiente.pk %}" class="btn btn-primary">Siguiente</a>
+        {% else %}
+        <a href="{% url 'modulo' ejercicio.modulo.slug %}" class="btn btn-primary">Terminar</a>
+        {% endif %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

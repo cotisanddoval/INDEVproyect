@@ -1,9 +1,40 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-<div class="text-center py-5">
-    <h1>INDEV</h1>
-    <p class="lead">Inglés para el mundo laboral</p>
-    <a href="#" class="btn btn-primary btn-lg">Empezar</a>
+<section class="hero">
+    <div class="row align-items-center g-4">
+        <div class="col-md-6">
+            <h1 class="hero-titulo">Mejorá tu inglés<br>para el mundo laboral</h1>
+            <p class="hero-texto">
+                Practicá vocabulario, conversaciones y entrevistas con ejercicios pensados para el trabajo.
+            </p>
+            <a href="#modulos" class="btn btn-indev btn-lg">Comenzar ahora</a>
+        </div>
+        <div class="col-md-6 text-center">
+            <!-- Opcional: ilustración. Si todavía no tenés la imagen, borrá este bloque. -->
+            <img src="{% static 'img/hero.png' %}" class="img-fluid" alt="">
+        </div>
+    </div>
+</section>
+
+<div class="mb-3" id="modulos">
+    <h2 class="h5 mb-0">Tus módulos</h2>
+</div>
+<div class="row g-3">
+    {% for modulo in modulos %}
+    <div class="col-6 col-lg-3">
+        <a href="{% url 'modulo' modulo.slug %}" class="text-decoration-none">
+            <div class="card-modulo {% cycle 'tono-rosa' 'tono-celeste' %}">
+                <div class="icono-circulo"><i class="bi {{ modulo.icono }}"></i></div>
+                <h3>{{ modulo.nombre }}</h3>
+                <p class="desc">{{ modulo.descripcion }}</p>
+                <span class="cuenta">{{ modulo.total_ejercicios }} ejercicios</span>
+            </div>
+        </a>
+    </div>
+    {% empty %}
+    <p class="text-muted">Todavía no hay módulos cargados.</p>
+    {% endfor %}
 </div>
 {% endblock %}
