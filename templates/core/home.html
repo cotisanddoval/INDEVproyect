@@ -29,7 +29,7 @@
 </section>
 
 <div class="mb-3" id="modulos">
-    <h2 class="h5 mb-0">Tus módulos</h2>
+    <h2 class="h1 mb-0 text-center">Módulos</h2>
 </div>
 <div class="row g-3">
     {% for modulo in modulos %}
@@ -39,7 +39,6 @@
                 <div class="icono-circulo"><i class="bi {{ modulo.icono }}"></i></div>
                 <h3>{{ modulo.nombre }}</h3>
                 <p class="desc">{{ modulo.descripcion }}</p>
-                <span class="cuenta">{{ modulo.total_ejercicios }} ejercicios</span>
             </div>
         </a>
     </div>
@@ -47,4 +46,66 @@
     <p class="text-muted">Todavía no hay módulos cargados.</p>
     {% endfor %}
 </div>
+
+<section class="explica">
+
+    <div class="row align-items-center g-5 explica-fila">
+        <div class="col-md-6 reveal reveal-izq">
+            <h2 class="explica-titulo">Inglés para el trabajo real</h2>
+            <p class="explica-texto">
+                Olvidate de las listas de palabras sueltas. En INDEV practicás las situaciones
+                que vas a vivir en tu trabajo: entrevistas, llamadas, correos y charlas con compañeros.
+            </p>
+        </div>
+        <div class="col-md-6 reveal reveal-der">
+            <div class="explica-visual visual-coral"><i class="bi bi-briefcase-fill"></i></div>
+        </div>
+    </div>
+
+    <div class="row align-items-center g-5 explica-fila flex-md-row-reverse">
+        <div class="col-md-6 reveal reveal-der">
+            <h2 class="explica-titulo">Paso a paso, sin saltearte nada</h2>
+            <p class="explica-texto">
+                Cada ejercicio se desbloquea cuando resolvés bien el anterior. Así avanzás con una
+                base firme y siempre sabés cuál es tu próximo paso.
+            </p>
+        </div>
+        <div class="col-md-6 reveal reveal-izq">
+            <div class="explica-visual visual-lavanda"><i class="bi bi-unlock-fill"></i></div>
+        </div>
+    </div>
+
+    <div class="row align-items-center g-5 explica-fila">
+        <div class="col-md-6 reveal reveal-izq">
+            <h2 class="explica-titulo">Ejercicios para practicar de verdad</h2>
+            <p class="explica-texto">
+                Elegí la opción correcta, completá la frase que falta o decidí si algo es verdadero
+                o falso. Los ejercicios cambian de formato para que practiques de distintas maneras.
+            </p>
+        </div>
+        <div class="col-md-6 reveal reveal-der">
+            <div class="explica-visual visual-coral"><i class="bi bi-puzzle-fill"></i></div>
+        </div>
+    </div>
+
+    <div class="row align-items-center g-5 explica-fila flex-md-row-reverse">
+        <div class="col-md-6 reveal reveal-der">
+            <h2 class="explica-titulo">Empezás desde cero</h2>
+            <p class="explica-texto">
+                Las consignas están en español y el contenido en inglés, así que podés empezar
+                aunque nunca hayas estudiado el idioma.
+            </p>
+        </div>
+        <div class="col-md-6 reveal reveal-izq">
+            <div class="explica-visual visual-lavanda"><i class="bi bi-translate"></i></div>
+        </div>
+    </div>
+
+    <div class="explica-cta reveal reveal-sube">
+        <h2>¿Listo para empezar?</h2>
+        <a href="#modulos" class="btn btn-indev btn-lg">Elegí tu módulo</a>
+    </div>
+
+</section>
+
 {% endblock %}
