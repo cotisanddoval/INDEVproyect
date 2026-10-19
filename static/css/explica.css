@@ -1,0 +1,44 @@
+/* ===== Secciones explicativas de la portada ===== */
+.explica { margin-top: 4rem; overflow-x: clip; }
+.explica-fila { padding: 2.5rem 0; }
+.explica-titulo {
+    color: var(--lavanda-oscuro);
+    font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+    line-height: 1.15;
+    margin-bottom: 1rem;
+}
+.explica-texto { color: #4b5563; font-size: 1.05rem; line-height: 1.7; max-width: 30rem; }
+
+.explica-img {
+    display: block;
+    width: 100%;
+    max-width: 380px;
+    margin: 0 auto;
+    animation: flotar-img 3s ease-in-out infinite;
+}
+
+@keyframes flotar-img {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-30px) rotate(1.5deg); }
+}
+.explica-fila:nth-child(even) .explica-img { animation-delay: -2s; }
+
+.explica-cta { text-align: center; padding: 3rem 0 2rem; }
+.explica-cta h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); color: var(--navy); margin-bottom: 1.25rem; }
+
+@keyframes flotar {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Animación al hacer scroll (la activa indev.js) */
+.reveal-activo .reveal { opacity: 0; transition: opacity .7s ease, transform .7s ease; }
+.reveal-activo .reveal-izq { transform: translateX(-60px); }
+.reveal-activo .reveal-der { transform: translateX(60px); }
+.reveal-activo .reveal-sube { transform: translateY(40px); }
+.reveal-activo .reveal.visible { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+    .reveal-activo .reveal { opacity: 1; transform: none; transition: none; }
+    .explica-img { animation: none; }
+}
