@@ -20,12 +20,26 @@ def modulo_detalle(request, slug):
     ejercicios = list(modulo.ejercicios.order_by("pk"))
 
     anterior_ok = True
+    hechos = 0
     for ej in ejercicios:
         ej.completado = ej.pk in completados
         ej.disponible = ej.completado or anterior_ok
+        ej.actual = ej.disponible and not ej.completado
+        if ej.completado:
+            hechos += 1
         anterior_ok = ej.completado
 
-    return render(request, "core/modulo.html", {"modulo": modulo, "ejercicios": ejercicios})
+    total = len(ejercicios)
+    porcentaje = round(hechos * 100 / total) if total else 0
+
+    return render(request, "core/modulo.html", {
+        "modulo": modulo,
+        "ejercicios": ejercicios,
+        "hechos": hechos,
+        "total": total,
+        "porcentaje": porcentaje,
+        "terminado": total > 0 and hechos == total,
+    })
 
 
 def ejercicio(request, pk):

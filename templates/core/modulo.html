@@ -4,36 +4,52 @@
 
 {% block content %}
 <a href="{% url 'home' %}" class="text-decoration-none small">&larr; Volver</a>
-<h1 class="h3 mt-2">{{ modulo.nombre }}</h1>
-<p class="text-muted mb-4">{{ modulo.descripcion }}</p>
+
+<div class="modulo-cabecera tono-rosa">
+    <div class="icono-circulo"><i class="bi {{ modulo.icono }}"></i></div>
+    <div class="flex-grow-1">
+        <h1 class="modulo-titulo">{{ modulo.nombre }}</h1>
+        <p class="modulo-desc">{{ modulo.descripcion }}</p>
+        <div class="d-flex justify-content-between small fw-semibold">
+            <span>{{ hechos }} de {{ total }} ejercicios completados</span>
+            <span>{{ porcentaje }}%</span>
+        </div>
+        <div class="progress modulo-progreso" role="progressbar"
+             aria-valuenow="{{ porcentaje }}" aria-valuemin="0" aria-valuemax="100">
+            <div class="progress-bar" style="width: {{ porcentaje }}%"></div>
+        </div>
+    </div>
+</div>
 
 {% for mensaje in messages %}
 <div class="alert alert-warning">{{ mensaje }}</div>
 {% endfor %}
 
-<div class="d-grid gap-2">
+<div class="camino">
     {% for ej in ejercicios %}
-        {% if ej.disponible %}
-        <a href="{% url 'ejercicio' ej.pk %}" class="fila-ejercicio {% if ej.completado %}hecho{% endif %}">
-            <span class="numero">{{ forloop.counter }}</span>
-            <span class="flex-grow-1">
-                <span class="tipo">{{ ej.get_tipo_display }}</span>
-                <span class="texto">{{ ej.enunciado|truncatechars:70 }}</span>
-            </span>
-            {% if ej.completado %}
-            <i class="bi bi-check-circle-fill"></i>
-            {% else %}
-            <i class="bi bi-play-circle"></i>
-            {% endif %}
-        </a>
+    <div class="camino-paso {% cycle 'pos-0' 'pos-1' 'pos-2' 'pos-3' %}">
+        {% if ej.actual %}
+        <span class="etiqueta-actual">Empezar</span>
+        <a href="{% url 'ejercicio' ej.pk %}" class="nodo actual"
+           title="{{ ej.enunciado|truncatechars:60 }}"><i class="bi bi-play-fill"></i></a>
+        {% elif ej.completado %}
+        <a href="{% url 'ejercicio' ej.pk %}" class="nodo hecho"
+           title="{{ ej.enunciado|truncatechars:60 }}"><i class="bi bi-check-lg"></i></a>
         {% else %}
-        <div class="fila-ejercicio bloqueado">
-            <span class="numero"><i class="bi bi-lock-fill"></i></span>
-            <span class="flex-grow-1 texto">Ejercicio {{ forloop.counter }}</span>
-        </div>
+        <div class="nodo bloqueado"><i class="bi bi-lock-fill"></i></div>
         {% endif %}
+        <span class="paso-texto">{{ forloop.counter }}. {{ ej.get_tipo_display }}</span>
+    </div>
     {% empty %}
     <p class="text-muted">Todavía no hay ejercicios en este módulo.</p>
     {% endfor %}
 </div>
+
+{% if terminado %}
+<div class="modulo-fin">
+    <i class="bi bi-trophy-fill"></i>
+    <p>¡Completaste este módulo!</p>
+    <a href="{% url 'home' %}#modulos" class="btn btn-indev">Elegir otro módulo</a>
+</div>
+{% endif %}
 {% endblock %}
