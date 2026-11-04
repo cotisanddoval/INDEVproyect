@@ -1,44 +1,41 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Mis módulos - INDEV{% endblock %}
 
 {% block content %}
-<div class="panel-saludo">
-    <div>
-        <h1 class="panel-titulo">¡Hola, {{ user.username }}!</h1>
-        <p class="panel-sub">Este es tu panel. Elegí un módulo y seguí practicando.</p>
+{% load static %}
+
+<div class="panel-dashboard-hero mb-4">
+    <div class="panel-dashboard-body">
+        <div class="panel-dashboard-text">
+            <span class="nivel-badge mb-2">
+                NIVEL ACTUAL: {{ nivel_actual }} - {{ nombre_nivel }}
+                <img src="{% static 'img/trofeo.png' %}" alt="Nivel" class="badge-img ms-1">
+            </span>
+            <h1 class="panel-titulo mt-2">¡Hola, {{ user.username }}!</h1>
+            <p class="panel-sub">Completá las actividades para avanzar de nivel. Elegí un módulo y seguí practicando.</p>
+            
+            <div class="hero-actions mt-3">
+                {% if siguiente %}
+                    <a href="{% url 'ejercicio' siguiente.pk %}" class="btn btn-indev btn-lg">
+                        {% if hechos_global %}Seguir practicando{% else %}Empezar a practicar{% endif %}
+                    </a>
+                {% elif total_global %}
+                    <span class="panel-fin">
+                        ¡Completaste este nivel!
+                    </span>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="panel-dashboard-img-wrapper">
+            <img src="{% static 'img/learning.png' %}" alt="Ilustración" class="panel-dashboard-img">
+        </div>
     </div>
-    {% if siguiente %}
-    <a href="{% url 'ejercicio' siguiente.pk %}" class="btn btn-indev btn-lg">
-        {% if hechos_global %}Seguir practicando{% else %}Empezar a practicar{% endif %}
-    </a>
-    {% elif total_global %}
-    <span class="panel-fin"><i class="bi bi-trophy-fill"></i> ¡Completaste todo el contenido!</span>
-    {% endif %}
 </div>
 
-<div class="row g-3">
-    <div class="col-md-4">
-        <div class="panel-dato">
-            <span class="dato-num">{{ hechos_global }}</span>
-            <span class="dato-txt">ejercicios resueltos</span>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="panel-dato">
-            <span class="dato-num">{{ modulos_completos }} de {{ total_modulos }}</span>
-            <span class="dato-txt">módulos completados</span>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="panel-dato">
-            <span class="dato-num">{{ porcentaje_global }}%</span>
-            <div class="progress panel-progreso mt-2" role="progressbar"
-                 aria-valuenow="{{ porcentaje_global }}" aria-valuemin="0" aria-valuemax="100">
-                <div class="progress-bar" style="width: {{ porcentaje_global }}%"></div>
-            </div>
-            <span class="dato-txt">progreso total</span>
-        </div>
+        
     </div>
 </div>
 

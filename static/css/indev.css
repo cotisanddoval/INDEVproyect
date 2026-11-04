@@ -951,7 +951,283 @@ a.nodo:hover { transform: translateY(-3px); color: #fff; }
     }
 }
 
+/* ===== Nivel actual ===== */
+.nivel-actual {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: 1.5rem 2rem;
+    background: linear-gradient(120deg, #fde4e2, #f0efff);
+    border: 1px solid rgba(158, 161, 219, 0.3);
+    border-radius: 1.2rem;
+    box-shadow: 0 4px 15px rgba(38, 50, 72, 0.06);
+}
 
+.nivel-etiqueta {
+    display: inline-block;
+    color: var(--lavanda-oscuro);
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    margin-bottom: 0.4rem;
+}
+
+.nivel-actual h2 {
+    color: var(--navy);
+    font-size: 1.7rem;
+    font-weight: 800;
+    margin-bottom: 0.4rem;
+}
+
+.nivel-actual p {
+    color: var(--navy);
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+.nivel-icono {
+    width: 65px;
+    height: 65px;
+    min-width: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    color: var(--lavanda-oscuro);
+    border-radius: 50%;
+    font-size: 2rem;
+    box-shadow: 0 3px 10px rgba(38, 50, 72, 0.08);
+}
+
+@media (max-width: 576px) {
+    .nivel-actual {
+        padding: 1.2rem;
+    }
+
+    .nivel-actual h2 {
+        font-size: 1.35rem;
+    }
+
+    .nivel-icono {
+        width: 50px;
+        height: 50px;
+        min-width: 50px;
+        font-size: 1.5rem;
+    }
+}
+
+/* Hero Banner Unificado */
+.panel-hero {
+    position: relative;
+    background: linear-gradient(135deg, #ffffff 0%, #f7f5ff 100%);
+    border: 1px solid #e9ecef;
+    border-radius: 16px;
+    padding: 2.25rem 2.5rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 650px;
+}
+
+.nivel-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background-color: #eee9ff;
+    color: #5c3cbe;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    padding: 0.35rem 0.85rem;
+    border-radius: 50px;
+}
+
+.hero-content .panel-titulo {
+    font-size: 1.85rem;
+    font-weight: 800;
+    color: #212529;
+    margin-bottom: 0.25rem;
+}
+
+.hero-content .panel-sub {
+    color: #6c757d;
+    font-size: 0.98rem;
+    margin-bottom: 0;
+}
+
+.hero-icon-bg {
+    font-size: 7rem;
+    color: #5c3cbe;
+    opacity: 0.08;
+    position: absolute;
+    right: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+@media (max-width: 768px) {
+    .panel-hero {
+        padding: 1.75rem 1.5rem;
+    }
+    .hero-icon-bg {
+        display: none;
+    }
+}
+
+/* Color vivo para el badge del nivel */
+.nivel-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: #f0ebff;
+    color: #6c5ce7;
+    border: 1px solid #dcd6f7;
+    font-size: 0.82rem;
+    font-weight: 700;
+    padding: 0.4rem 0.9rem;
+    border-radius: 50px;
+}
+
+/* Hero Banner Limpio */
+.panel-hero {
+    background: linear-gradient(135deg, #ffffff 0%, #f7f5ff 100%);
+    border: 1px solid #e9ecef;
+    border-radius: 16px;
+    padding: 2rem 2.25rem;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.03);
+}
+
+.nivel-badge {
+    display: inline-flex;
+    align-items: center;
+    background-color: #eee9ff;
+    color: #5c3cbe;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    padding: 0.35rem 0.85rem;
+    border-radius: 50px;
+}
+
+.nivel-badge svg {
+    fill: #5c3cbe;
+    margin-right: 4px;
+}
+
+.hero-content .panel-titulo {
+    font-size: 1.85rem;
+    font-weight: 800;
+    color: #212529;
+    margin-bottom: 0.25rem;
+}
+
+.hero-content .panel-sub {
+    color: #6c757d;
+    font-size: 0.95rem;
+    margin-bottom: 0;
+}
+
+.badge-img {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+    vertical-align: text-bottom;
+}
+
+/* Layout del Hero con Ilustración */
+.hero-body {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+}
+
+.hero-text {
+    flex: 1;
+    max-width: 600px;
+}
+
+.hero-img-container {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* === AISLADO: HERO CON ILUSTRACIÓN A LA DERECHA === */
+.panel-dashboard-hero {
+    background: linear-gradient(135deg, #ffffff 0%, #f7f5ff 100%);
+    border: 1px solid #e9ecef;
+    border-radius: 16px;
+    padding: 2.75rem 3rem;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.03);
+}
+
+.panel-dashboard-body {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.panel-dashboard-text {
+    flex: 1;
+    max-width: 580px;
+}
+
+.panel-dashboard-img-wrapper {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Control del tamaño de la imagen */
+.panel-dashboard-img {
+    max-height: 150px;
+    width: auto;
+    object-fit: contain;
+}
+
+/* Estilo del badge de nivel */
+.nivel-badge {
+    display: inline-flex;
+    align-items: center;
+    background-color: #eee9ff;
+    color: #5c3cbe;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    padding: 0.35rem 0.85rem;
+    border-radius: 50px;
+}
+
+.badge-img {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+}
+
+/* Ocultar en dispositivos móviles para mantener legibilidad */
+@media (max-width: 768px) {
+    .panel-dashboard-body {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .panel-dashboard-img-wrapper {
+        display: none;
+    }
+}
 
 
 

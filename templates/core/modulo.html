@@ -10,6 +10,9 @@
     <div class="flex-grow-1">
         <h1 class="modulo-titulo">{{ modulo.nombre }}</h1>
         <p class="modulo-desc">{{ modulo.descripcion }}</p>
+        <span class="badge rounded-pill text-bg-light mb-3">
+    Nivel {{ nivel_actual }} - {{ nombre_nivel }}
+</span>
         <div class="d-flex justify-content-between small fw-semibold">
             <span>{{ hechos }} de {{ total }} ejercicios completados</span>
             <span>{{ porcentaje }}%</span>
@@ -41,7 +44,10 @@
         <span class="paso-texto">{{ forloop.counter }}. {{ ej.get_tipo_display }}</span>
     </div>
     {% empty %}
-    <p class="text-muted">Todavía no hay ejercicios en este módulo.</p>
+    <p class="text-muted">
+    Todavía no hay actividades disponibles para este nivel.
+    ¡Próximamente!
+</p>
     {% endfor %}
 </div>
 
