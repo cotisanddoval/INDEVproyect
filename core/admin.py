@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Modulo, Ejercicio, Opcion
+from .models import Modulo, Ejercicio, Opcion, Progreso
 
 
 class OpcionInline(admin.TabularInline):
@@ -18,3 +18,8 @@ class EjercicioAdmin(admin.ModelAdmin):
 class ModuloAdmin(admin.ModelAdmin):
     list_display = ("nombre", "orden")
     prepopulated_fields = {"slug": ("nombre",)}
+    
+@admin.register(Progreso)
+class ProgresoAdmin(admin.ModelAdmin):
+    list_display = ("usuario", "ejercicio", "fecha")
+    list_filter = ("usuario",)

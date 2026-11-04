@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Registrarse - INDEV{% endblock %}
+
+{% block content %}
+<div class="cuenta-caja">
+    <h1 class="cuenta-titulo">Crear cuenta</h1>
+    <p class="text-muted">Registrate para guardar tu avance en cada módulo.</p>
+
+    <form method="post">
+        {% csrf_token %}
+
+        {% for campo in form %}
+        <div class="mb-3">
+            <label for="{{ campo.id_for_label }}" class="form-label fw-semibold">{{ campo.label }}</label>
+            {{ campo }}
+            {% if campo.help_text %}
+            <div class="form-text">{{ campo.help_text|safe }}</div>
+            {% endif %}
+            {% for error in campo.errors %}
+            <div class="text-danger small mt-1">{{ error }}</div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+
+        <button type="submit" class="btn btn-indev w-100">Crear cuenta</button>
+    </form>
+
+    <p class="text-center mt-3 mb-0 small">
+        ¿Ya tenés cuenta? <a href="{% url 'login' %}">Iniciá sesión</a>
+    </p>
+</div>
+{% endblock %}

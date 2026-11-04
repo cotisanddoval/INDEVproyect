@@ -1,5 +1,6 @@
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.conf import settings
 
 
 class Modulo(models.Model):
@@ -11,14 +12,27 @@ class Modulo(models.Model):
         help_text="Clase de Bootstrap Icons, ej: bi-briefcase"
     )
     orden = models.PositiveSmallIntegerField(default=0)
-
+    NIVELES = [("A1", "A1"), ("A2", "A2"), ("B1", "B1"), ("B2", "B2")]
+    nivel = models.CharField(max_length=2, choices=NIVELES, default="A1")
+    aprenderas = models.TextField(
+        "Lo que vas a aprender", blank=True, default="",
+        help_text="Un punto por línea. Se muestra en el panel del usuario."
+    )
+    
+    @property
+    def puntos(self):
+        return [linea.strip() for linea in self.aprenderas.splitlines() if linea.strip()]
     class Meta:
         ordering = ["orden"]
+    
+ 
 
     def __str__(self):
         return self.nombre
 
-
+    @property
+    def puntos(self):
+        return [linea.strip() for linea in self.aprenderas.splitlines() if linea.strip()]
 class Ejercicio(models.Model):
     SELECCION = "seleccion"
     COMPLETAR = "completar"
@@ -95,3 +109,19 @@ class Opcion(models.Model):
 
     def __str__(self):
         return self.texto
+    
+class Progreso(models.Model):
+    usuario = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="progresos"
+    )
+    ejercicio = models.ForeignKey(Ejercicio, on_delete=models.CASCADE, related_name="progresos")
+    fecha = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name_plural = "progresos"
+        constraints = [
+            models.UniqueConstraint(fields=["usuario", "ejercicio"], name="progreso_unico")
+        ]
+
+    def __str__(self):
+        return f"{self.usuario} - ejercicio {self.ejercicio_id}"

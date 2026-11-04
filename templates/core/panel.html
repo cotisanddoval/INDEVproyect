@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block title %}Mis módulos - INDEV{% endblock %}
+
+{% block content %}
+<div class="panel-saludo">
+    <div>
+        <h1 class="panel-titulo">¡Hola, {{ user.username }}!</h1>
+        <p class="panel-sub">Este es tu panel. Elegí un módulo y seguí practicando.</p>
+    </div>
+    {% if siguiente %}
+    <a href="{% url 'ejercicio' siguiente.pk %}" class="btn btn-indev btn-lg">
+        {% if hechos_global %}Seguir practicando{% else %}Empezar a practicar{% endif %}
+    </a>
+    {% elif total_global %}
+    <span class="panel-fin"><i class="bi bi-trophy-fill"></i> ¡Completaste todo el contenido!</span>
+    {% endif %}
+</div>
+
+<div class="row g-3">
+    <div class="col-md-4">
+        <div class="panel-dato">
+            <span class="dato-num">{{ hechos_global }}</span>
+            <span class="dato-txt">ejercicios resueltos</span>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="panel-dato">
+            <span class="dato-num">{{ modulos_completos }} de {{ total_modulos }}</span>
+            <span class="dato-txt">módulos completados</span>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="panel-dato">
+            <span class="dato-num">{{ porcentaje_global }}%</span>
+            <div class="progress panel-progreso mt-2" role="progressbar"
+                 aria-valuenow="{{ porcentaje_global }}" aria-valuemin="0" aria-valuemax="100">
+                <div class="progress-bar" style="width: {{ porcentaje_global }}%"></div>
+            </div>
+            <span class="dato-txt">progreso total</span>
+        </div>
+    </div>
+</div>
+
+<h2 class="panel-seccion">Tus módulos</h2>
+<div class="row g-4">
+    {% for m in modulos %}
+    <div class="col-md-6">
+        <div class="panel-modulo {% cycle 'tono-rosa' 'tono-celeste' %}">
+            <div class="panel-modulo-cab">
+                <div class="icono-circulo"><i class="bi {{ m.icono }}"></i></div>
+                <div>
+                    <h3>{{ m.nombre }}</h3>
+                    <p class="desc">{{ m.descripcion }}</p>
+                </div>
+            </div>
+
+            {% if m.puntos %}
+            <p class="panel-aprenderas">En este módulo vas a aprender a:</p>
+            <ul class="panel-lista">
+                {% for punto in m.puntos %}
+                <li>{{ punto }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+            {% if m.total %}
+            <div class="panel-accion">
+                <div class="d-flex justify-content-between small fw-semibold">
+                    <span>{% if m.completo %}¡Completado!{% else %}{{ m.porcentaje }}% completado{% endif %}</span>
+                </div>
+                <div class="progress panel-progreso mt-1" role="progressbar"
+                     aria-valuenow="{{ m.porcentaje }}" aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-bar" style="width: {{ m.porcentaje }}%"></div>
+                </div>
+                <a href="{% url 'modulo' m.slug %}" class="btn btn-indev btn-sm w-100 mt-3">
+                    {% if m.completo %}Repasar{% elif m.empezado %}Continuar{% else %}Empezar{% endif %}
+                </a>
+            </div>
+            {% else %}
+            <span class="badge-pronto">Próximamente</span>
+            {% endif %}
+        </div>
+    </div>
+    {% empty %}
+    <p class="text-muted">Todavía no hay módulos cargados.</p>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -5,15 +5,20 @@
 <section class="hero">
     <div class="row align-items-center g-4">
         <div class="col-md-6">
-            <h1 class="hero-titulo animate__animated animate__backInDown">Mejorá tu inglés<br>para el mundo laboral</h1>
+            <h1 class="hero-titulo animate__animated animate__backInDown">Tu futuro habla ingles.<br>Y vos?</h1>
             <p class="hero-texto animate__animated animate__backInLeft">
-                Practicá vocabulario, conversaciones y entrevistas con ejercicios pensados para el trabajo.
+                Practicá inglés para entrevistas, conversaciones y situaciones reales de trabajo. ¡Dale el primer paso a nuevas oportunidades!
             </p>
             
-                <a href="#modulos"
-                class="btn btn-indev btn-comenzar btn-lg animate__animated animate__pulse animate__infinite animate__slow">
-                Comenzar ahora <span aria-hidden="true">→</span>
-                </a>
+                {% if user.is_authenticated %}
+<a href="{% url 'panel' %}" class="btn btn-indev btn-lg animate__animated animate__pulse animate__infinite animate__slow">Ir a mis módulos</a>
+{% else %}
+<a href="{% url 'registro' %}" class="btn btn-indev btn-lg">¡Empecemos!</a>
+<div class="hero-pildora">
+    
+    
+</div>
+{% endif %}
 
         </div>
         <div class="col-md-6">
@@ -29,16 +34,22 @@
 </section>
 
 <div class="mb-3" id="modulos">
-    <h2 class="h1 mb-0 text-center">Módulos</h2>
+    
 </div>
-<div class="row g-3">
+<div class="row g-4 fila-tarjetas">
     {% for modulo in modulos %}
-    <div class="col-6 col-lg-3">
+    <div class="col-md-6 col-lg-3">
         <a href="{% url 'modulo' modulo.slug %}" class="text-decoration-none">
-            <div class="card-modulo {% cycle 'tono-rosa' 'tono-celeste' %}">
-                <div class="icono-circulo"><i class="bi {{ modulo.icono }}"></i></div>
-                <h3>{{ modulo.nombre }}</h3>
-                <p class="desc">{{ modulo.descripcion }}</p>
+            <div class="tarjeta {% cycle 'tinte-coral' 'tinte-lavanda' 'tinte-cielo' %}">
+                <div class="tarjeta-texto">
+                    <span class="tarjeta-nivel">Nivel {{ modulo.nivel }}</span>
+                    <h3>{{ modulo.nombre }}</h3>
+                    <p>{{ modulo.descripcion }}</p>
+                </div>
+                <div class="tarjeta-visual">
+                    <img src="{% static 'img/modulos/'|add:modulo.slug|add:'.png' %}" alt="{{ modulo.nombre }}">
+                </div>
+                <span class="tarjeta-flecha"><i class="bi bi-arrow-up-right"></i></span>
             </div>
         </a>
     </div>
@@ -105,11 +116,15 @@
         </div>
     </div>
 
-    <div class="explica-cta reveal reveal-sube">
-        <h2>¿Listo para empezar? prueba</h2>
-        <a href="#modulos" class="btn btn-indev btn-lg">Elegí tu módulo</a>
+        <div class="explica-cta reveal reveal-sube">
+        <h2>¿Listo para empezar?</h2>
+        {% if user.is_authenticated %}
+        <a href="{% url 'panel' %}" class="btn btn-indev btn-lg">Ir a mis módulos</a>
+        {% else %}
+        <a href="{% url 'registro' %}" class="btn btn-indev btn-lg">Crear mi cuenta</a>
+        {% endif %}
     </div>
 
 </section>
-
 {% endblock %}
+

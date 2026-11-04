@@ -10,32 +10,244 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <link rel="stylesheet" href="{% static 'css/indev.css' %}?v=8">
+    <link rel="stylesheet" href="{% static 'css/indev.css' %}?v=18">
     <link rel="stylesheet" href="{% static 'css/explica.css' %}?v=2">
     <script src="{% static 'js/indev.js' %}?v=1" defer></script>
 
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-indev">
-        <div class="container">
-            <a class="navbar-brand" href="{% url 'home' %}">
-    <img src="{% static 'img/logonavbar.png' %}?v=2" alt="INDEV - Inglés + Development" class="logo-img">
-</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="menu">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'home' %}#modulos">Módulos</a></li>
-                </ul>
+    <div class="container">
+        <a class="navbar-brand" href="{% url 'home' %}">
+            <img src="{% static 'img/logonavbar.png' %}" alt="INDEV - Inglés + Development" class="logo-img">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="menu">
+            {% with n=request.resolver_match.url_name %}
+            <ul class="navbar-nav nav-pildora mx-lg-auto">
+                <li class="nav-item">
+                    <a class="nav-link {% if n == 'home' %}active{% endif %}" href="{% url 'home' %}">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    {% if user.is_authenticated %}
+                    <a class="nav-link {% if n == 'panel' or n == 'modulo' or n == 'ejercicio' %}active{% endif %}" href="{% url 'panel' %}">Módulos</a>
+                    {% else %}
+                    <a class="nav-link" href="{% url 'home' %}#modulos">Módulos</a>
+                    {% endif %}
+                </li>
+            </ul>
+            {% endwith %}
+
+            <div class="nav-acciones">
+                {% if user.is_authenticated %}
+                <span class="nav-usuario"><i class="bi bi-person-circle"></i> {{ user.username }}</span>
+                <form method="post" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-salir btn-sm">Salir</button>
+                </form>
+                {% else %}
+                <a class="nav-link-texto" href="{% url 'login' %}">Iniciar sesión</a>
+                <a class="btn btn-indev btn-sm" href="{% url 'registro' %}">Registrarse</a>
+                {% endif %}
             </div>
         </div>
-    </nav>
+    </div>
+</nav>
 
     <main class="container py-4">
         {% block content %}{% endblock %}
     </main>
+
+<!-- ===== FOOTER INDEV ===== -->
+
+<footer class="footer-indev">
+
+    <div class="container">
+
+        <div class="footer-contenido">
+
+            <!-- Identidad de INDEV -->
+
+            <div class="footer-brand">
+
+                <a href="{% url 'home' %}"
+                   class="footer-logo">
+
+                    <span class="footer-logo-in">IN</span><span class="footer-logo-dev">DEV</span>
+
+                </a>
+
+                <p class="footer-eslogan">
+                    Tu futuro habla inglés. ¿Y vos?
+                </p>
+
+                <p class="footer-descripcion">
+                    Practicá inglés para entrevistas, conversaciones
+                    y situaciones reales de trabajo.
+                </p>
+
+                <a href="{% url 'registro' %}"
+                   class="footer-cta">
+
+                    ¡Dale, empecemos!
+                    <i class="bi bi-arrow-right"></i>
+
+                </a>
+
+            </div>
+
+
+            <!-- Navegación -->
+
+            <div class="footer-columna">
+
+                <h3 class="footer-titulo">
+                    Explorá
+                </h3>
+
+                <ul class="footer-links">
+
+                    <li>
+                        <a href="{% url 'home' %}">
+                            Inicio
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'home' %}#modulos">
+                            Módulos
+                        </a>
+                    </li>
+
+                    {% if user.is_authenticated %}
+
+                    <li>
+                        <a href="{% url 'panel' %}">
+                            Mi progreso
+                        </a>
+                    </li>
+
+                    {% endif %}
+
+                </ul>
+
+            </div>
+
+
+            <!-- Aprendizaje -->
+
+            <div class="footer-columna">
+
+                <h3 class="footer-titulo">
+                    Aprendé
+                </h3>
+
+                <ul class="footer-links">
+
+                    <li>
+                        <a href="{% url 'home' %}#modulos">
+                            Vocabulario laboral
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'home' %}#modulos">
+                            Entrevistas
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'home' %}#modulos">
+                            Conversaciones
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <!-- Cuenta -->
+
+            <div class="footer-columna">
+
+                <h3 class="footer-titulo">
+                    Tu cuenta
+                </h3>
+
+                <ul class="footer-links">
+
+                    {% if user.is_authenticated %}
+
+                    <li>
+                        <a href="{% url 'panel' %}">
+                            Mi espacio
+                        </a>
+                    </li>
+
+                    {% else %}
+
+                    <li>
+                        <a href="{% url 'login' %}">
+                            Iniciar sesión
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'registro' %}">
+                            Crear cuenta
+                        </a>
+                    </li>
+
+                    {% endif %}
+
+                </ul>
+
+            </div>
+
+        </div>
+
+
+        <!-- Frase final -->
+
+        <div class="footer-mensaje">
+
+            <p>
+                Cada palabra te acerca a una nueva oportunidad.
+            </p>
+
+            <div class="footer-decoracion">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+        </div>
+
+
+        <!-- Copyright -->
+
+        <div class="footer-inferior">
+
+            <p>
+                © {% now "Y" %} INDEV.
+                Inglés para tu futuro laboral.
+            </p>
+
+            <span class="footer-hecho">
+                Made with <i class="bi bi-heart-fill"></i> for your future.
+            </span>
+
+        </div>
+
+    </div>
+
+</footer>
+
+<!-- ===== FIN FOOTER ===== -->
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
