@@ -10,7 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <link rel="stylesheet" href="{% static 'css/indev.css' %}?v=18">
+    <link rel="stylesheet" href="{% static 'css/indev.css' %}?v=22">
     <link rel="stylesheet" href="{% static 'css/explica.css' %}?v=2">
     <script src="{% static 'js/indev.js' %}?v=1" defer></script>
 
@@ -73,26 +73,24 @@
 
             <div class="footer-brand">
 
-                <a href="{% url 'home' %}"
-                   class="footer-logo">
-
-                    <span class="footer-logo-in">IN</span><span class="footer-logo-dev">DEV</span>
-
-                </a>
+                <a href="{% url 'home' %}" class="footer-logo">
+    <img src="{% static 'img/logonavbar.png' %}"
+         alt="INDEV - Inglés + Development"
+         class="logo-img">
+</a>
 
                 <p class="footer-eslogan">
-                    Tu futuro habla inglés. ¿Y vos?
+                    Más inglés. Más oportunidades.
                 </p>
 
                 <p class="footer-descripcion">
-                    Practicá inglés para entrevistas, conversaciones
-                    y situaciones reales de trabajo.
+                    El mundo laboral también habla inglés. Practicá, aprendé y preparáte para nuevas oportunidades con INDEV.
                 </p>
 
                 <a href="{% url 'registro' %}"
                    class="footer-cta">
 
-                    ¡Dale, empecemos!
+                    Empezar ahora
                     <i class="bi bi-arrow-right"></i>
 
                 </a>
@@ -238,7 +236,7 @@
             </p>
 
             <span class="footer-hecho">
-                Made with <i class="bi bi-heart-fill"></i> for your future.
+                Made with <i class="bi bi-heart-fill"></i> by @cotisanddoval for your future.
             </span>
 
         </div>

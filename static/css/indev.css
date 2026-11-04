@@ -675,3 +675,284 @@ a.nodo:hover { transform: translateY(-3px); color: #fff; }
 }
 
 
+/* ========================================
+   INDEV - FOOTER
+======================================== */
+
+.footer-indev {
+    position: relative;
+
+    margin-top: 5rem;
+    padding: 4rem 0 1.5rem;
+
+    background: var(--navy);
+    color: #fff;
+
+    overflow: hidden;
+}
+
+/* ===== Contenido principal ===== */
+
+.footer-contenido {
+    display: grid;
+
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+
+    gap: 3rem;
+
+    padding-bottom: 3rem;
+}
+
+/* ===== Identidad ===== */
+
+.footer-logo {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.footer-logo-img {
+    height: 44px;
+    width: auto;
+    display: block;
+}
+.footer-eslogan {
+    margin: 1.2rem 0 .7rem;
+
+    color: #fff;
+
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.footer-descripcion {
+    max-width: 320px;
+
+    margin-bottom: 1.5rem;
+
+    color: #D8DFEB;
+
+    font-size: .85rem;
+    line-height: 1.8;
+}
+
+/* ===== Botón ===== */
+
+.footer-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: .6rem;
+
+    padding: .7rem 1.2rem;
+
+    background: var(--coral);
+    color: var(--navy);
+
+    border-radius: .75rem;
+
+    font-size: .85rem;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition: transform .2s ease,
+                background .2s ease;
+}
+
+.footer-cta:hover {
+    background: #FFAAA6;
+    color: var(--navy);
+
+    transform: translateY(-2px);
+}
+
+/* ===== Columnas ===== */
+
+.footer-columna {
+    padding-top: .4rem;
+}
+
+.footer-titulo {
+    margin-bottom: 1.2rem;
+
+    color: var(--coral);
+
+    font-family: var(--fuente-texto);
+    font-size: .95rem;
+    font-weight: 800;
+}
+
+.footer-links {
+    display: flex;
+    flex-direction: column;
+
+    gap: .85rem;
+
+    padding: 0;
+    margin: 0;
+
+    list-style: none;
+}
+
+.footer-links a {
+    color: #D8DFEB;
+
+    font-size: .85rem;
+    text-decoration: none;
+
+    transition: color .2s ease,
+                padding-left .2s ease;
+}
+
+.footer-links a:hover {
+    color: var(--coral);
+
+    padding-left: 4px;
+}
+
+/* ===== Mensaje final ===== */
+
+.footer-mensaje {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 1rem;
+
+    padding: 1.5rem 0;
+
+    border-top: 1px solid rgba(255, 255, 255, .12);
+}
+
+.footer-mensaje p {
+    margin: 0;
+
+    color: #fff;
+
+    font-family: var(--fuente-texto);
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+/* Decoración */
+
+.footer-decoracion {
+    display: flex;
+    align-items: center;
+
+    gap: .5rem;
+}
+
+.footer-decoracion span {
+    display: block;
+
+    width: 9px;
+    height: 9px;
+
+    border-radius: 50%;
+
+    background: var(--coral);
+}
+
+.footer-decoracion span:nth-child(2) {
+    background: var(--lavanda);
+}
+
+.footer-decoracion span:nth-child(3) {
+    background: var(--celeste, #76B9E8);
+}
+
+/* ===== Copyright ===== */
+
+.footer-inferior {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 1rem;
+
+    padding-top: 1.2rem;
+
+    border-top: 1px solid rgba(255, 255, 255, .12);
+}
+
+.footer-inferior p {
+    margin: 0;
+
+    color: #AEB9CC;
+
+    font-size: .75rem;
+}
+
+.footer-hecho {
+    color: #AEB9CC;
+
+    font-size: .75rem;
+}
+
+.footer-hecho i {
+    color: var(--coral);
+    margin: 0 .15rem;
+}
+
+/* ===== Responsive ===== */
+
+@media (max-width: 991px) {
+
+    .footer-contenido {
+        grid-template-columns: 1.5fr 1fr 1fr;
+
+        gap: 2rem;
+    }
+
+    .footer-brand {
+        grid-column: 1 / -1;
+
+        max-width: 500px;
+    }
+}
+
+@media (max-width: 575px) {
+
+    .footer-indev {
+        margin-top: 3rem;
+
+        padding: 3rem 0 1.5rem;
+    }
+
+    .footer-contenido {
+        grid-template-columns: 1fr 1fr;
+
+        gap: 2rem 1.5rem;
+    }
+
+    .footer-brand {
+        grid-column: 1 / -1;
+    }
+
+    .footer-mensaje {
+        align-items: flex-start;
+        flex-direction: column;
+
+        gap: .8rem;
+    }
+
+    .footer-mensaje p {
+        font-size: .9rem;
+    }
+
+    .footer-inferior {
+        align-items: flex-start;
+        flex-direction: column;
+
+        gap: .5rem;
+    }
+}
+
+
+
+
+
+
